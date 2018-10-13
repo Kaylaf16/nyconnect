@@ -7,7 +7,7 @@ class Navigation extends Component {
 
       <div class="navigation">
         <a href="#">Sign Up</a>
-        <a href="#" target="_blank">Account</a>
+        <a href="#">Account</a>
         <a href="#" target="_blank">Home</a>
       </div>
 
