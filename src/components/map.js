@@ -5,17 +5,28 @@ import Button from '@material-ui/core/Button';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import { connect } from "react-redux";
+import { ListView } from './listview'
 import Icon from '@material-ui/core/Icon';
 import { fetchUsers } from '../actions';
 import Divider from '@material-ui/core/Divider';
 class Map extends Component {
   constructor(props) {
 super(props);
-this.state = { width: 0, height: 0 };
+this.state = { width: 0, height: 0,listview:false };
 this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
+this.showListView = this.showListView.bind(this);
 }
 componentWillMount(){
   this.props.fetchUsers()
+
+}
+showListView(){
+  if(this.state.listview){
+    this.setState({listview:false})
+  }
+  else{
+    this.setState({listview:true})
+  }
 
 }
 componentDidMount() {
@@ -36,7 +47,7 @@ toggleDrawer = (side, open) => () => {
   });
 };
    render() {
-    const {buttonStyle,inputStyle,buttonStyleMini} = style
+    const {buttonStyle,inputStyle,buttonStyleMini,buttonStyleList} = style
      const mapstyle=[
        {
          "elementType": "geometry",
@@ -327,6 +338,7 @@ toggleDrawer = (side, open) => () => {
            new window.google.maps.LatLng(40.756795, -73.954298 ),
            new window.google.maps.LatLng(40.756795, -73.954298 )
      ]
+    //var data = this.props.users
    const GoogleMapExample = withGoogleMap(props => (
       <GoogleMap
          defaultOptions={defaultMapOptions}
@@ -361,10 +373,15 @@ toggleDrawer = (side, open) => () => {
 </div>
 </div>
 </Drawer>
-        <GoogleMapExample
-          containerElement={ <div style={{ height: `${this.state.height}px`, width:`${this.state.width}px`,position:"absolute", top:0,left:0}} /> }
-          mapElement={ <div style={{ height: `100%` }} /> }
-        />
+<Button style={buttonStyleList} onClick={this.showListView}>List View</Button>
+
+{this.state.listview?(<ListView/>):(
+  <GoogleMapExample
+    containerElement={ <div style={{ height: `${this.state.height}px`, width:`${this.state.width}px`,position:"absolute", top:0,left:0}} /> }
+    mapElement={ <div style={{ height: `100%` }} /> }
+  />
+)}
+
       </div>
    );
    }
@@ -387,6 +404,27 @@ const style= {
  marginTop:"6%",
  fontWeight:600,
  cursor:'pointer'
+  },
+  buttonStyleList:{
+    marginLeft:'90',
+ width:195,
+ zIndex:3,
+  textTransform: 'uppercase',
+ outline: 'none',
+ boxShadow:'0px 8px 15px rgba(0, 0, 0, 0.1)',
+ height:45,
+ backgroundColor:'white',
+ border:'none',
+ color:'#42e7a6',
+ fontFamily:'Roboto, sans-serif',
+ fontSize:18,
+ marginTop:"3%",
+
+ fontWeight:600,
+ cursor:'pointer',
+ position:'absolute',
+ top:"85%",
+ left:"3%"
   },
  buttonStyle:{
    marginLeft:'90',
