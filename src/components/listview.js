@@ -2,19 +2,28 @@ import React, { Component } from 'react';
 import  {ListItem} from './listitem'
 import Divider from '@material-ui/core/Divider';
 class ListView extends Component {
+  renderUsers(){
+const { backgroundStyles,innerListView,dividerStyle} = styles;
+  var userListData =[]
+  var list = this.props.data
+    list.forEach(x=>{
+      userListData.push(
+        <div>
+        <ListItem name={x.name} skills ={x.skills}/>
+        <center><Divider style={dividerStyle}/></center>
+        </div>
+      )
+    })
+    return userListData
+  }
   render(){
+  var getUserList =this.renderUsers()
     const { backgroundStyles,innerListView,dividerStyle} = styles;
     return(
       <div style={backgroundStyles}>
         <div style ={innerListView}>
-          <ListItem/>
-          <center><Divider style={dividerStyle}/></center>
-          <ListItem/>
-          <center><Divider style={dividerStyle}/></center>
-          <ListItem/>
-          <center><Divider style={dividerStyle}/></center>
-          <ListItem/>
-          <center><Divider style={dividerStyle}/></center>
+
+          {getUserList}
         </div>
       </div>
     )
@@ -48,7 +57,7 @@ const styles ={
     paddingTop:"4%",
     paddingBottom:"4%",
       boxShadow: '17px 17px rgba(0,0,0,0.3)',
-    backgroundColor:"#040511",
+    backgroundColor:"#2e323c",
     marginTop:"120px"
   }
 }

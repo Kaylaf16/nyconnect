@@ -1,13 +1,11 @@
 export default function(state = null, action) {
-  var users =[]
+  var usersList =[]
+  var currentobject = {}
   switch (action.type) {
     case "FETCH_USERS":
-      users=action.payload
-      //users.forEach(x=>{
-        //users.push(new window.google.maps.LatLng(x.latitude, x.longitude))
-      //})
-      //return users
-      return {userLocations:action.payload,userData:action.payload}
+      usersList =action.payload
+      console.log(usersList)
+      return action.payload
   }
 
   return state;

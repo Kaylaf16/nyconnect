@@ -7,8 +7,8 @@ class ListItem extends Component {
       <div style={divBox}>
       <img src="avatar.png" style={imgStyle}/>
       <div style={{display:'flex',flexDirection:'column',color:'white',height:"100px",width:"280px",margin:0,padding:0,marginLeft:'30px',marginTop:'30px'}}>
-      <span style={{marginBottom:'10px'}}><b>Placeholder Name</b></span>
-      <span>Skills  Skills  Skills  Skills  Skills  Skills </span>
+      <span style={{marginBottom:'10px'}}><b>{this.props.name}</b></span>
+      <span>{this.props.skills}</span>
       </div>
       <Button style={buttonStyle}>Connect</Button>
     </div>

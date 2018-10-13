@@ -1,24 +1,48 @@
 import React, { Component } from 'react';
-import { withGoogleMap, GoogleMap } from 'react-google-maps';
+import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
 import HeatmapLayer from "react-google-maps/lib/components/visualization/HeatmapLayer";
 import Button from '@material-ui/core/Button';
 import Drawer from '@material-ui/core/Drawer';
+import Slider from '@material-ui/lab/Slider';
 import List from '@material-ui/core/List';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { connect } from "react-redux";
 import { ListView } from './listview'
 import Icon from '@material-ui/core/Icon';
+import Checkbox from '@material-ui/core/Checkbox';
 import { fetchUsers } from '../actions';
 import Divider from '@material-ui/core/Divider';
+let name =''
+let radius =null
 class Map extends Component {
   constructor(props) {
 super(props);
-this.state = { width: 0, height: 0,listview:false,view:'LIST VIEW' };
+this.state = { width: 0, height: 0,listview:false,view:'LIST VIEW',radius:null,name:"" };
 this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
 this.showListView = this.showListView.bind(this);
+this.setHeatMapData = this.setHeatMapData.bind(this)
+this.updateSearch = this.updateSearch.bind(this)
 }
 componentWillMount(){
-  this.props.fetchUsers()
+    this.props.fetchUsers()
+}
+updateSearch(){
+  if(radius)
+  {
+    this.props.fetchUsers(name,radius)
+  }else{
+    this.props.fetchUsers(name)
+  }
 
+}
+setHeatMapData(){
+  let markerpoints = [];
+  this.props.users.forEach(function(x){
+    markerpoints.push(
+      <Marker position={{ lat: parseFloat(x.lat), lng: parseFloat(x.lon) }} />
+    )
+  })
+return markerpoints
 }
 showListView(){
   if(this.state.listview){
@@ -37,7 +61,12 @@ window.addEventListener('resize', this.updateWindowDimensions);
 componentWillUnmount() {
 window.removeEventListener('resize', this.updateWindowDimensions);
 }
-
+onTodoChange(value){
+name = value
+    }
+    onTodoChangeradius(value){
+    radius = parseFloat(value)
+        }
 updateWindowDimensions() {
 this.setState({ width: window.innerWidth, height: window.innerHeight });
 }
@@ -47,7 +76,8 @@ toggleDrawer = (side, open) => () => {
   });
 };
    render() {
-    const {buttonStyle,inputStyle,buttonStyleMini,buttonStyleList,buttonDiv} = style
+
+    const {buttonStyle,inputStyle,buttonStyleMini,buttonStyleList,buttonDiv,inputDiv} = style
      const mapstyle=[
        {
          "elementType": "geometry",
@@ -338,6 +368,8 @@ toggleDrawer = (side, open) => () => {
            new window.google.maps.LatLng(40.756795, -73.954298 ),
            new window.google.maps.LatLng(40.756795, -73.954298 )
      ]
+
+
     //var data = this.props.users
    const GoogleMapExample = withGoogleMap(props => (
       <GoogleMap
@@ -350,10 +382,12 @@ toggleDrawer = (side, open) => () => {
         defaultZoom = { 13 }
 
       >
-      <HeatmapLayer data={data}/>
+      {this.props.users?this.setHeatMapData():null}
+
       </GoogleMap>
    ));
    return(
+
       <div>
       <center><Button style={buttonStyle} onClick={this.toggleDrawer('right', true)}  >
         Find People!
@@ -361,20 +395,24 @@ toggleDrawer = (side, open) => () => {
         <Drawer anchor="right" open={this.state.right} onClose={this.toggleDrawer('right', false)}>
         <div style={{backgroundColor:"#101315",width:`${this.state.width/4}px`,height:'100%'}}>
         <div
-        style={{padding:20,width:"100%",height:'20%',backgroundColor:"#101315",display:"flex",alignItems:"start",flexDirection:"column"}}
+        style={{padding:20,width:"100%",height:'20%',paddingTop:40,backgroundColor:"#101315",display:"flex",alignItems:"start",flexDirection:"column"}}
         tabIndex={0}
         role="button"
         >
 
-<input style ={inputStyle} placeholder="Search a skill"/>
-
-<Button style={buttonStyleMini}>Search</Button>
+<div style={inputDiv}>
+<input style ={inputStyle} id="search" onChange={e => this.onTodoChange(e.target.value)}placeholder="Search a skill"/>
+</div>
+<div style={inputDiv}>
+<input style ={inputStyle} id="radius" onChange={e => this.onTodoChangeradius(e.target.value)}placeholder="choose a radius" type="number"/>
+</div>
+<Button style={buttonStyleMini} onClick={this.updateSearch}>Search</Button>
 </div>
 </div>
 </Drawer>
 <Button style={buttonStyleList} onClick={this.showListView}>{this.state.view}</Button>
 
-{this.state.listview?(<ListView/>):(
+{this.state.listview?(<ListView data={this.props.users}/>):(
   <GoogleMapExample
     containerElement={ <div style={{ height: `${this.state.height}px`, width:`${this.state.width}px`,position:"absolute", top:0,left:0}} /> }
     mapElement={ <div style={{ height: `100%` }} /> }
@@ -388,15 +426,12 @@ toggleDrawer = (side, open) => () => {
 const style= {
   buttonStyleMini:{
     marginLeft:'90',
- width:100,
+
  zIndex:3,
   textTransform: 'uppercase',
  outline: 'none',
 
- height:45,
-
  border:'none',
- borderRadius:45,
  color:'white',
  fontFamily:'Roboto, sans-serif',
  fontSize:18,
@@ -444,15 +479,20 @@ marginTop:"3%",
 fontWeight:600,
 cursor:'pointer'
 },
+inputDiv:{
+  borderBottom:"2px solid #42e7a6",
+  width:'auto',
+  paddingBottom:'8px',
+  marginBottom:'20px'
+},
 inputStyle:{
    marginTop:"6%",
    outline:"none",
 backgroundColor:"transparent",
 border:"none",
-width:"50%",
+width:"100%",
 color:"white",
 fontSize:"16px",
-borderBottom:"2px solid #42e7a6",
 
 }
 }
