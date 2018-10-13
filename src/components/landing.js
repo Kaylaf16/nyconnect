@@ -37,7 +37,7 @@ class landing extends Component {
 
                       </div>
             </div>
-            <button style={buttonStyle}className="button">Explore</button>
+            <button style={buttonStyle}className="button"><a href="/#/explore"style={{linkStyleType:'none'}}>Explore</a></button>
       </div>
 
     )

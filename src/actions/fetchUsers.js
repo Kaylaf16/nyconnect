@@ -9,6 +9,7 @@ export const fetchUsers = (search,radius) => async dispatch => {
     var lat = position.coords.latitude;
     var long = position.coords.longitude;
 
+
     var fetchURL = (search?`/map/filterUsersBySkill?lat=${lat}&long=${long}&skill=${search}`:`/map/filterUsers?lat=${lat}&long=${long}`)
     if(radius){
       fetchURL=fetchURL+`&radius=${radius}`

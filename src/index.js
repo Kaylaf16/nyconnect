@@ -21,7 +21,7 @@ const Routes = () => (
     <Route exact path="/explore" component={Map} />
     <Route exact path="/login" component={Login} />
     <Route exact path="/account" component={Account} />
-    <Route exact path="/landing" component={landing} />
+    <Route exact path="/" component={landing} />
 
     </div>
   </HashRouter>
