@@ -5,10 +5,10 @@ class Navigation extends Component {
     return(
       <div>
 
-      <div class="topnav">
+      <div class="navigation">
         <a href="#">Sign Up</a>
         <a href="#" target="_blank">Account</a>
-        <a href="#" target="_blank">Sign up</a>
+        <a href="#" target="_blank">Home</a>
       </div>
 
 
