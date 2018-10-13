@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
-
+import {Navigation} from './Navigation'
 class Account extends Component {
   render(){
     return(
+
+<div class="background">
+
       <div class="profile-card">
 
-      <h2>User Profile Card</h2>
+      <Navigation/>
+
 
       <div class="card">
+        <h2>Account</h2>
           <div class="card-image">
             <img src="Profile1.png" alt="" />
           </div>
@@ -38,6 +43,8 @@ class Account extends Component {
       </div>
 
       </div>
+      </div>
+
     )
   }
 }
