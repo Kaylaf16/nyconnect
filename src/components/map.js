@@ -3,7 +3,7 @@ import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
 import HeatmapLayer from "react-google-maps/lib/components/visualization/HeatmapLayer";
 import Button from '@material-ui/core/Button';
 import Drawer from '@material-ui/core/Drawer';
-import Slider from '@material-ui/lab/Slider';
+
 import List from '@material-ui/core/List';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { connect } from "react-redux";

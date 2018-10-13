@@ -6,6 +6,7 @@ import thunkMiddleware from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import  Map  from './components/map';
+import  {landing}  from './components/landing';
 import  {Login}  from './components/Login';
 import  {Account}  from './components/Account';
 import reducers from './reducers';
@@ -20,6 +21,8 @@ const Routes = () => (
     <Route exact path="/explore" component={Map} />
     <Route exact path="/login" component={Login} />
     <Route exact path="/account" component={Account} />
+    <Route exact path="/landing" component={landing} />
+
     </div>
   </HashRouter>
 

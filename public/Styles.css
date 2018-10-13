@@ -1,21 +1,59 @@
 
+.map-image{
+  width: 500px;
+}
+.hero{
+font-family: 'Open Sans', sans-serif;
+font-weight: 400;
+color: white;
+padding-top: 200px;
+margin-left: 15%;
+}
+.column{
+  color: white;
+  float: left;
+  width: 50%;
+  height: 500px;
+  text-align: left;
+  box-sizing: border-box;
+}
+.column h2,p{
+  padding-top: 1%;
+  margin-left: 30%;
+
+}
+.underline{
+height: 8px;
+margin-left: 57px;
+width: 200px;
+}
+.hero h1{
+  color: white;
+  font-size: 50px;
+  text-decoration: none;
+  background: -webkit-linear-gradient(-120deg, #8BF8C3 13%, #00E676 38%, #00B75E 96%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: 'Cardo', serif;
+}
+.hero h2{
+  margin-bottom: 1px;
+
+}
+
+
 .background{
   background-color: black;
+  background-image: url("dotsbg.png");
+  background-repeat: no-repeat;
+}
+.dotsbg{
   background-image: url("dots.png");
 }
 
 ::-webkit-scrollbar {
     display: none;
 }
-.logo-box{
-    position: absolute;
-    top: 40px;
-    left: 40px;
-}
-.logo{
-    height: 35px;
-}
-
 .profile-card{
   font-family: 'Open Sans', sans-serif;
     font-weight: 400;
@@ -32,6 +70,7 @@ background-color:transparent;
  top: 0;
  width: 90%;
  margin-top: 1%;
+ margin-right: 5%;
 
 }
 .navigation a {

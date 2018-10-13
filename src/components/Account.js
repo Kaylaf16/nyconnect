@@ -12,6 +12,7 @@ class Account extends Component {
       <Navigation/>
 
       <div class="card">
+
           <div >
             <img class="card-image" src="profile.png" alt="" />
           </div>
@@ -24,12 +25,7 @@ class Account extends Component {
             <img class="icons" src="linkedin.png" alt="" />
           <img class="icons" src="github.png" alt="" />
         </div>
-        <div>
-          <a href="#"><i class="fa fa-dribbble"></i></a>
-            <a href="#"><i class="fa fa-twitter"></i></a>
-            <a href="#"><i class="fa fa-linkedin"></i></a>
-          <a href="#"><i class="fa fa-facebook"></i></a>
-       </div>
+
        <div>
        <p class="bold-skills">SKILLS</p>
        <hr/ >
