@@ -3,6 +3,9 @@
   background-color: black;
   background-image: url("dots.png");
 }
+::-webkit-scrollbar {
+    display: none;
+}
 .profile-card{
   font-family: 'Open Sans', sans-serif;
     font-weight: 400;

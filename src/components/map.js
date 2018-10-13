@@ -12,7 +12,7 @@ import Divider from '@material-ui/core/Divider';
 class Map extends Component {
   constructor(props) {
 super(props);
-this.state = { width: 0, height: 0,listview:false };
+this.state = { width: 0, height: 0,listview:false,view:'LIST VIEW' };
 this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
 this.showListView = this.showListView.bind(this);
 }
@@ -22,10 +22,10 @@ componentWillMount(){
 }
 showListView(){
   if(this.state.listview){
-    this.setState({listview:false})
+    this.setState({listview:false,view:'LIST VIEW'})
   }
   else{
-    this.setState({listview:true})
+    this.setState({listview:true,view:'MAP VIEW'})
   }
 
 }
@@ -47,7 +47,7 @@ toggleDrawer = (side, open) => () => {
   });
 };
    render() {
-    const {buttonStyle,inputStyle,buttonStyleMini,buttonStyleList} = style
+    const {buttonStyle,inputStyle,buttonStyleMini,buttonStyleList,buttonDiv} = style
      const mapstyle=[
        {
          "elementType": "geometry",
@@ -355,14 +355,13 @@ toggleDrawer = (side, open) => () => {
    ));
    return(
       <div>
-
-      <Button style={buttonStyle} onClick={this.toggleDrawer('right', true)}  >
+      <center><Button style={buttonStyle} onClick={this.toggleDrawer('right', true)}  >
         Find People!
-        </Button>
+        </Button></center>
         <Drawer anchor="right" open={this.state.right} onClose={this.toggleDrawer('right', false)}>
         <div style={{backgroundColor:"#101315",width:`${this.state.width/4}px`,height:'100%'}}>
         <div
-        style={{padding:20,width:"100%",height:'20%',backgroundColor:"#1b2024",display:"flex",alignItems:"start",flexDirection:"column"}}
+        style={{padding:20,width:"100%",height:'20%',backgroundColor:"#101315",display:"flex",alignItems:"start",flexDirection:"column"}}
         tabIndex={0}
         role="button"
         >
@@ -373,7 +372,7 @@ toggleDrawer = (side, open) => () => {
 </div>
 </div>
 </Drawer>
-<Button style={buttonStyleList} onClick={this.showListView}>List View</Button>
+<Button style={buttonStyleList} onClick={this.showListView}>{this.state.view}</Button>
 
 {this.state.listview?(<ListView/>):(
   <GoogleMapExample
@@ -427,7 +426,7 @@ const style= {
  left:"3%"
   },
  buttonStyle:{
-   marginLeft:'90',
+
 width:195,
 zIndex:3,
  textTransform: 'uppercase',
@@ -441,7 +440,7 @@ color:'white',
 fontFamily:'Roboto, sans-serif',
 fontSize:18,
 marginTop:"3%",
-marginLeft:"40%",
+
 fontWeight:600,
 cursor:'pointer'
 },
